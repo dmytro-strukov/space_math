@@ -1,0 +1,45 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require_relative '../lib/space_math'
+
+# Apollo 11: launch Earth, land Moon, launch Moon, land Earth
+puts 'Apollo 11:'
+apollo_result = SpaceMath.mission_calculate(
+  28_801,
+  SpaceMath::Mission.new(steps: [
+                           SpaceMath::MissionStep.new(:launch, :earth),
+                           SpaceMath::MissionStep.new(:land, :moon),
+                           SpaceMath::MissionStep.new(:launch, :moon),
+                           SpaceMath::MissionStep.new(:land, :earth)
+                         ])
+)
+puts "Equipment: 28801 kg, Calculated fuel: #{apollo_result} kg, Expected fuel: 51898 kg"
+
+# Mission on Mars: launch Earth, land Mars, launch Mars, land Earth
+puts "\nMission on Mars:"
+mars_result = SpaceMath.mission_calculate(
+  14_606,
+  SpaceMath::Mission.new(steps: [
+                           SpaceMath::MissionStep.new(:launch, :earth),
+                           SpaceMath::MissionStep.new(:land, :mars),
+                           SpaceMath::MissionStep.new(:launch, :mars),
+                           SpaceMath::MissionStep.new(:land, :earth)
+                         ])
+)
+puts "Equipment: 14606 kg, Calculated fuel: #{mars_result} kg, Expected fuel: 33388 kg"
+
+# Passenger ship: launch Earth, land Moon, launch Moon, land Mars, launch Mars, land Earth
+puts "\nPassenger ship:"
+passenger_result = SpaceMath.mission_calculate(
+  75_432,
+  SpaceMath::Mission.new(steps: [
+                           SpaceMath::MissionStep.new(:launch, :earth),
+                           SpaceMath::MissionStep.new(:land, :moon),
+                           SpaceMath::MissionStep.new(:launch, :moon),
+                           SpaceMath::MissionStep.new(:land, :mars),
+                           SpaceMath::MissionStep.new(:launch, :mars),
+                           SpaceMath::MissionStep.new(:land, :earth)
+                         ])
+)
+puts "Equipment: 75432 kg, Calculated fuel: #{passenger_result} kg, Expected fuel: 212161 kg"
